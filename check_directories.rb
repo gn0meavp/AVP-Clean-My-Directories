@@ -1,8 +1,18 @@
-require 'digest/md5'
 
-# !!! Update pathes before launch
-path_1 = "from_w"
-path_2 = "from_s"
+path_1 = ARGV[0]
+path_2 = ARGV[1]
+
+if path_1 == nil || path_2 == nil
+	puts "usage: ruby check_directories.rb path1 path2"
+	abort
+end
+
+if path_1 == path_2
+	puts "Cannot compare directory "+ path_1 +" with itself. Sorry =/"
+	abort
+end
+
+require 'digest/md5'
 
 def findUniqueHashesForDirectory(path)
 	puts "Looking into "+path+" directory.."	
@@ -49,11 +59,6 @@ def compareHashes(hashes_1, hashes_2, path_1, path_2)
 end
 
 ##########################################################################################
-
-if path_1 == path_2
-	puts "Cannot compare directory "+ path_1 +" with itself. Sorry =/"
-	abort
-end
 
 hashes_1 = findUniqueHashesForDirectory(path_1)
 puts "\n"
