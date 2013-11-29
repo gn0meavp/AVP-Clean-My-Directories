@@ -25,10 +25,11 @@ def findUniqueHashesForDirectory(path)
 				next 
 			end	
 			
-			hash = Digest::MD5.hexdigest(File.read(path+"/"+fname));
+			hash = Digest::MD5.hexdigest(File.read(path+"/"+fname))+" "+
+						Digest::SHA256.hexdigest(File.read(path+"/"+fname));
 			
 			if hashes.key?(hash)
-				puts "	Warning! '"+fname+"' is duplicate to '"+hashes[hash]+"'"
+				puts "	Warning! '"+fname+"' is duplicate with '"+hashes[hash]+"'"
 			end
 		
 # 			puts fname.to_s+" "+hash
