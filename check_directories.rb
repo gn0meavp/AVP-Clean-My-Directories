@@ -43,15 +43,9 @@ end
 def compareHashes(hashes_1, hashes_2, path_1, path_2)
 	puts "Comparing "+path_1+" with "+path_2
 	hashes_1.each do |hash_1, filename_1| 
-		found = false;
-		hashes_2.each do |hash_2, filename_2|
-			if hash_1 == hash_2
-				found = true;		
-			end
-		end 
-		
-		if found == false
-			puts "	"+filename_1+" not found in "+path_1;
+
+		if hashes_2.key(hash_1) == false
+			puts "	"+filename_1+" not found in "+path_1;		
 		end
 		
 	end
