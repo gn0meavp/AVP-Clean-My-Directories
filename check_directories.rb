@@ -1,3 +1,4 @@
+beginning = Time.now
 
 path_1 = ARGV[0]
 path_2 = ARGV[1]
@@ -63,3 +64,6 @@ puts "\n"
 compareHashes(hashes_1, hashes_2, path_1, path_2)
 puts "\n"
 compareHashes(hashes_2, hashes_1, path_2, path_1)
+puts "\n"
+
+puts "Work completed in #{Time.now - beginning} seconds"
