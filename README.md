@@ -14,10 +14,11 @@ Looking into from_w directory..
 	Warning! '2013-11-29 15-00-01_1385723587.JPG' is duplicate to '2013-11-29 15-00-01_1385723522.JPG'
 Have found (153) unique files
 
----------------------------------
 Looking into from_s directory..
 	Warning! 'IMG_0002.JPG' is duplicate to 'IMG_0001.JPG'
 Have found (154) unique files
+
+---------------------------------
 
 Comparing from_w with from_s
 Comparing completed!
@@ -25,5 +26,9 @@ Comparing completed!
 Comparing from_s with from_w
 	IMG_0155.MOV not found in from_s
 Comparing completed!
+
 ---------------------------------
+
+Work completed in 0.594885 seconds
+
 ```

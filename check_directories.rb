@@ -45,7 +45,7 @@ def compareHashes(hashes_1, hashes_2, path_1, path_2)
 	puts "Comparing "+path_1+" with "+path_2
 	hashes_1.each do |hash_1, filename_1| 
 
-		if hashes_2.key(hash_1) == false
+		if hashes_2.key?(hash_1) == false
 			puts "	"+filename_1+" not found in "+path_1;		
 		end
 		
@@ -59,11 +59,12 @@ hashes_1 = findUniqueHashesForDirectory(path_1)
 puts "\n"
 hashes_2 = findUniqueHashesForDirectory(path_2)
 
-puts "\n"
+puts "\n---------------------------------\n\n"
+
 
 compareHashes(hashes_1, hashes_2, path_1, path_2)
 puts "\n"
 compareHashes(hashes_2, hashes_1, path_2, path_1)
-puts "\n"
 
+puts "\n---------------------------------\n\n"
 puts "Work completed in #{Time.now - beginning} seconds"
