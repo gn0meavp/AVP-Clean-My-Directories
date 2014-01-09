@@ -1,7 +1,26 @@
 beginning = Time.now
 
-path_1 = ARGV[0]
-path_2 = ARGV[1]
+path_1 = ARGV[ARGV.count - 2]
+path_2 = ARGV[ARGV.count - 1]
+
+if (ARGV.count > 2) 
+    
+    params = ARGV[0..ARGV.count - 3]
+    
+end
+
+compare_XMP = false
+
+if params != nil && params.count > 0 
+   
+    if params.include? "--compare_XMP"
+        compare_XMP = true
+        puts "XMP files will be compared!"
+    else
+        puts "XMP files will be skipped!"
+    end
+   
+end
 
 if path_1 == nil || path_2 == nil
 	puts "usage: ruby check_directories.rb path1 path2"
@@ -15,13 +34,13 @@ end
 
 require 'digest/md5'
 
-def findUniqueHashesForDirectory(path)
+def findUniqueHashesForDirectory(path, compare_XMP)
 	puts "Looking into "+path+" directory.."	
 	
 	hashes = Hash.new(0)
 	
 		Dir.foreach(path) do |fname|
-			if fname == "." || fname == ".DS_Store" || fname == ".."
+			if fname == "." || fname == ".DS_Store" || fname == ".." || (compare_XMP == false && File.extname(fname) == ".XMP")
 				next 
 			end	
 			
@@ -56,9 +75,9 @@ end
 
 ##########################################################################################
 
-hashes_1 = findUniqueHashesForDirectory(path_1)
+hashes_1 = findUniqueHashesForDirectory(path_1, compare_XMP)
 puts "\n"
-hashes_2 = findUniqueHashesForDirectory(path_2)
+hashes_2 = findUniqueHashesForDirectory(path_2, compare_XMP)
 
 puts "\n---------------------------------\n\n"
 
