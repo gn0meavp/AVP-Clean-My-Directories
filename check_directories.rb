@@ -23,7 +23,7 @@ if params != nil && params.count > 0
 end
 
 if path_1 == nil || path_2 == nil
-	puts "usage: ruby check_directories.rb path1 path2"
+	puts "usage: ruby check_directories.rb [--compare_XMP] path1 path2"
 	abort
 end
 
