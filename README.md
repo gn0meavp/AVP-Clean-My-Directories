@@ -1,43 +1,21 @@
-YD.CheckDirectories
+AVP Clean My Directories
 ===================
 
-Сравнивает содержимое двух папок по хэшам (MD5+SHA256) и сообщает каких файлов нет в каждой из них. 
-Скрипт может быть полезен для проверки работы папки Фотокамера на клиентах Яндекс.Диска. (*)
+Scripts for compare directories and find unique and duplicate files. All scripts use combination of MD5 and SHA256 hashes.
 
-Для настройки необходимо указать папки для сравнения
-
+check_directories.rb - compare two directories (non recursively!) and find unique files in each
 usage:
-$ ruby check_directories.rb [--compare_XMP] path_1 path_2
+$ruby check_directories.rb [--compare_XMP] path_1 path_2
+	using --compare_XMP includes .XMP files (might be useful for comparing with iPhone Photo Library taken by Image Capture tool)
 
-параметр --compare_XMP используется, если при сравнении нужно учитывать и файлы с расширением XMP
-По умолчанию .XMP файлы пропускаются! (при скачивании с устройства в папке могут оказываться эти файлы, в облако они не заливаются)
+find_dups.rb - find duplicates in directory (recursively)
+usage:
+$ruby find_dups.rb path
 
-Результат работы выглядит следующим образом:
+calculate_hashes.rb - calculate hashes of the certain directory (recursively). Might be use with find_new_content.rb. Save output to some file for that
+usage:
+$ruby calculate_hashes.rb path
 
-```
-Looking into path_1 directory..
-	Warning! '2013-11-29 14-59-56_1385724631.JPG' is duplicate to '2013-11-29 14-59-56_1385724565.JPG'
-	Warning! '2013-11-29 15-00-01_1385723587.JPG' is duplicate to '2013-11-29 15-00-01_1385723522.JPG'
-Have found (153) unique files
-
-Looking into path_2 directory..
-	Warning! 'IMG_0002.JPG' is duplicate to 'IMG_0001.JPG'
-Have found (154) unique files
-
----------------------------------
-
-Comparing path_1 with path_2
-Comparing completed!
-
-Comparing path_2 with path_1
-	IMG_0155.MOV not found in from_s
-Comparing completed!
-
----------------------------------
-
-Work completed in 0.594885 seconds
-
-```
-
-Примечания:
-(*) – iPhone 5S при плохих условиях съёмки создаёт на устройстве несколько фотографий из которых пользователь может выбрать только одну для показа в Фотоальбоме. При скачивании фотографий с устройства через Image Capture тем не менее скачиваются все. При сравнении фотографий такие фотографии будут показаны в облаке как отсутствующие (две из трёх будут отсутствовать). На девайсе такие фотографии помечаются как (Burst 3 photos).
+find_new_content.rb - find new content in directory (recursively) using file of cashes calculated by calculate_hashes.rb script
+usage: 
+$ruby find_new_content.rb hash_file new_content_dir
